@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ImageUploader from "react-images-upload";
 import Form from "./Form";
+import "./App.css";
+
 const App = (props) => {
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
@@ -9,7 +11,7 @@ const App = (props) => {
     setPictures([...pictures, picture]);
   };
   return (
-    <div style={{ width: "30%", height: "50%", margin: "auto" }}>
+    <div className="widget-container">
       <Form {...props} setNotes={setNotes} />
       <ImageUploader
         {...props}
