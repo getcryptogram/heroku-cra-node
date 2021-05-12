@@ -1,18 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ImageUploader from "react-images-upload";
 import Form from "./Form";
-import S3FileUpload from "react-s3";
+import S3 from "react-aws-s3";
+
 import "./App.css";
 
 const url = process.env.REACT_APP_INTEGROMAT_URL;
-const testData = { picture1: "string1", picture2: "string2" };
 const config = {
   bucketName: "lulu-postupload",
   dirName: "Orders" /* optional */,
   region: "us-east-2",
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
 };
+const ReactS3Client = new S3(config);
 
 const App = (props) => {
   const [pictures, setPictures] = useState([]);
@@ -21,19 +22,23 @@ const App = (props) => {
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
   };
+
+  //Uploads files to s3 bucket
   const uploadToS3 = (picture) => {
-    S3FileUpload.uploadFile(picture, config)
+    const fileName = "test";
+    ReactS3Client.uploadFile(picture, fileName)
       .then((data) => {
+        console.log("data ", data);
         console.log("data.location ", data.location);
       })
       .catch((err) => {
         console.warn("error occurred: ", err);
       });
   };
+  // Process images that are ready for uploading
   const prepareData = () => {
-    // Process images that are ready for uploading
     pictures.forEach((picture) => {
-      uploadToS3(picture);
+      uploadToS3(picture[0]);
     });
     return {
       pictures: pictures,
@@ -43,7 +48,7 @@ const App = (props) => {
   const fetchIntegromat = async (url = "", data) => {
     console.log("What is url ", url);
     console.log("What is data ", JSON.stringify(data));
-
+    prepareData();
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "no-cors", // no-cors, *cors, same-origin
