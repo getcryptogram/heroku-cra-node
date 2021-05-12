@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import ImageUploader from "react-images-upload";
 import Form from "./Form";
 import S3 from "react-aws-s3";
@@ -22,11 +22,10 @@ const App = (props) => {
 
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
-    console.log("called again");
   };
 
   //Uploads files to s3 bucket
-  const uploadToS3 = (picture) => {
+  async function uploadToS3 = (picture) => {
     ReactS3Client.uploadFile(picture, picture.name)
       .then((data) => {
         console.log("data.location ", data.location);
@@ -37,17 +36,19 @@ const App = (props) => {
         console.warn("error occurred: ", err);
       });
   };
+
   const checkPictures = () => {
     console.log("pictures ", pictures);
   };
   const checkPictureURL = () => {
-    console.log("pictureURls", pictureUrls);
+    console.log("pictureURLs", pictureUrls);
   };
+
   // Process images that are ready for uploading
   async function prepareData() {
-    console.log("assuming last one is correct ", pictures[pictures.length -1]);
-    await const pictureUrls = pictures[pictures.length - 1].map((picture) => {
-      const url = uploadToS3(picture);
+   console.log("assuming last one is correct ", pictures[pictures.length -1]);
+   const pictureUrls = pictures[pictures.length - 1].map((picture) => {
+      const url = await uploadToS3(picture);
       return url;
     });
     console.log("what is actually pictureUrls ", pictureUrls);
