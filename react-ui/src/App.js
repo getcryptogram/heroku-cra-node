@@ -23,6 +23,7 @@ const App = (props) => {
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     };
