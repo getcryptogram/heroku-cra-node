@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 const Form = (props) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <label>
         Drawing Notes:
         <textarea
-          value={drawingNotes}
+          value={props.drawingNotes}
           onChange={(event) => props.setNotes(event.target.value)}
         />
       </label>
