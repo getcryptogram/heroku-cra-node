@@ -22,7 +22,7 @@ const App = (props) => {
     setPictures([...pictures, picture]);
   };
   const uploadToS3 = (picture) => {
-    S3FileUpload.uploadFile(e.target.files[0], config)
+    S3FileUpload.uploadFile(picture, config)
       .then((data) => {
         console.log("data.location ", data.location);
       })
