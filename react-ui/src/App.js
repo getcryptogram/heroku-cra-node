@@ -1,10 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ImageUploader from "react-images-upload";
 import Form from "./Form";
+import S3FileUpload from "react-s3";
 import "./App.css";
 
 const url = process.env.REACT_APP_INTEGROMAT_URL;
 const testData = { picture1: "string1", picture2: "string2" };
+const config = {
+  bucketName: "lulu-postupload",
+  dirName: "Orders" /* optional */,
+  region: "us-east-2",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+};
+
 const App = (props) => {
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
@@ -12,7 +21,25 @@ const App = (props) => {
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
   };
-
+  const uploadToS3 = (picture) => {
+    S3FileUpload.uploadFile(e.target.files[0], config)
+      .then((data) => {
+        console.log("data.location ", data.location);
+      })
+      .catch((err) => {
+        console.warn("error occurred: ", err);
+      });
+  };
+  const prepareData = () => {
+    // Process images that are ready for uploading
+    pictures.forEach((picture) => {
+      uploadToS3(picture);
+    });
+    return {
+      pictures: pictures,
+      drawingNotes: drawingNotes,
+    };
+  };
   const fetchIntegromat = async (url = "", data) => {
     console.log("What is url ", url);
     console.log("What is data ", JSON.stringify(data));
@@ -60,7 +87,7 @@ const App = (props) => {
         imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
         maxFileSize={10242880}
       />
-      <button onClick={() => handleSubmit(url, testData)}>
+      <button onClick={() => handleSubmit(url, prepareData())}>
         Click me to submit!
       </button>
     </div>
