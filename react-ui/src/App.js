@@ -17,37 +17,47 @@ const ReactS3Client = new S3(config);
 
 const App = (props) => {
   const [pictures, setPictures] = useState([]);
+  const [pictureUrls, setPictureUrl] = useState([]);
   const [drawingNotes, setNotes] = useState("");
 
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
+    console.log("called again");
   };
 
   //Uploads files to s3 bucket
   const uploadToS3 = (picture) => {
-    const fileName = "test";
-    ReactS3Client.uploadFile(picture, fileName)
+    ReactS3Client.uploadFile(picture, picture.name)
       .then((data) => {
-        console.log("data ", data);
         console.log("data.location ", data.location);
+        setPictureUrl([...pictureUrls, data.location]);
+        return data.location;
       })
       .catch((err) => {
         console.warn("error occurred: ", err);
       });
   };
+  const checkPictures = () => {
+    console.log("pictures ", pictures);
+  };
+  const checkPictureURL = () => {
+    console.log("pictureURls", pictureUrls);
+  };
   // Process images that are ready for uploading
-  const prepareData = () => {
-    pictures.forEach((picture) => {
-      uploadToS3(picture[0]);
+  async function prepareData() {
+    console.log("assuming last one is correct ", pictures[pictures.length -1]);
+    await const pictureUrls = pictures[pictures.length - 1].map((picture) => {
+      const url = uploadToS3(picture);
+      return url;
     });
+    console.log("what is actually pictureUrls ", pictureUrls);
+    setPictureUrl(pictureUrls);
     return {
-      pictures: pictures,
+      pictures: pictureUrls,
       drawingNotes: drawingNotes,
     };
-  };
+  }
   const fetchIntegromat = async (url = "", data) => {
-    console.log("What is url ", url);
-    console.log("What is data ", JSON.stringify(data));
     prepareData();
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -95,6 +105,8 @@ const App = (props) => {
       <button onClick={() => handleSubmit(url, prepareData())}>
         Click me to submit!
       </button>
+      <button onClick={checkPictures}>Check Pictures State</button>
+      <button onClick={checkPictureURL}>Check Picture URLs</button>
     </div>
   );
 };
