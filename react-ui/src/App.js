@@ -25,16 +25,19 @@ const App = (props) => {
   };
 
   //Uploads files to s3 bucket
-  async function uploadToS3 = (picture) => {
-    ReactS3Client.uploadFile(picture, picture.name)
-      .then((data) => {
-        console.log("data.location ", data.location);
-        setPictureUrl([...pictureUrls, data.location]);
-        return data.location;
-      })
-      .catch((err) => {
-        console.warn("error occurred: ", err);
-      });
+  const uploadToS3 = async (picture) => {
+    return new Promise((resolve, reject) => {
+      return ReactS3Client.uploadFile(picture, picture.name)
+        .then((data) => {
+          console.log("data.location ", data.location);
+          // setPictureUrl([...pictureUrls, data.location]);
+          // console.log("now pictureUrl is ", pictureUrls);
+          resolve(data.location);
+        })
+        .catch((err) => {
+          console.warn("error occurred: ", err);
+        });
+    });
   };
 
   const checkPictures = () => {
@@ -45,21 +48,18 @@ const App = (props) => {
   };
 
   // Process images that are ready for uploading
-  async function prepareData() {
-   console.log("assuming last one is correct ", pictures[pictures.length -1]);
-   const pictureUrls = pictures[pictures.length - 1].map((picture) => {
-      const url = await uploadToS3(picture);
-      return url;
-    });
-    console.log("what is actually pictureUrls ", pictureUrls);
-    setPictureUrl(pictureUrls);
-    return {
-      pictures: pictureUrls,
-      drawingNotes: drawingNotes,
-    };
-  }
+  const prepareData = async () => {
+    const results = await Promise.all(
+      pictures[pictures.length - 1].map(async (picture) => {
+        const url = uploadToS3(picture);
+        console.log("youve been mapped ", url);
+        return url;
+      })
+    );
+
+    return results;
+  };
   const fetchIntegromat = async (url = "", data) => {
-    prepareData();
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "no-cors", // no-cors, *cors, same-origin
@@ -75,9 +75,14 @@ const App = (props) => {
     return response.json();
   };
 
-  const handleSubmit = (url, data) => {
-    console.log("calling with ", url, data);
-    fetchIntegromat(url, data)
+  const handleSubmit = async () => {
+    const preparedData = await prepareData();
+    console.log("what is preparedData ", preparedData);
+    const finalData = {
+      imageUrls: preparedData,
+      drawingNotes: drawingNotes,
+    };
+    fetchIntegromat(url, finalData)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
@@ -103,9 +108,7 @@ const App = (props) => {
         imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
         maxFileSize={10242880}
       />
-      <button onClick={() => handleSubmit(url, prepareData())}>
-        Click me to submit!
-      </button>
+      <button onClick={() => handleSubmit()}>Click me to submit!</button>
       <button onClick={checkPictures}>Check Pictures State</button>
       <button onClick={checkPictureURL}>Check Picture URLs</button>
     </div>
