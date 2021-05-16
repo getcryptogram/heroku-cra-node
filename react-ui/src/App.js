@@ -44,10 +44,10 @@ const App = (props) => {
     const originWindow = parent.document.getElementById(window.name);
     console.log("parent is ", parent);
 
-    const title = originWindow.getElementsByClassName(
+    const title = window.parent.document.getElementsByClassName(
       "product__description__name order-summary__emphasis"
     )[0].innerHTML;
-    const variant = originWindow.getElementsByClassName(
+    const variant = window.parent.document.getElementsByClassName(
       "product__description__variant order-summary__small-text"
     )[0].innerText;
     console.log("title is  ", title);
