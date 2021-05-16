@@ -40,11 +40,15 @@ const App = (props) => {
     });
   };
 
-  const checkPictures = () => {
-    console.log("pictures ", pictures);
-  };
-  const checkPictureURL = () => {
-    console.log("pictureURLs", pictureUrls);
+  const checkOrderInfo = () => {
+    const title = document.getElementsByClassName(
+      "product__description__name order-summary__emphasis"
+    )[0].innerHTML;
+    const variant = document.getElementsByClassName(
+      "product__description__variant order-summary__small-text"
+    )[0].innerText;
+    console.log("title is  ", title);
+    console.log("variant is  ", variant);
   };
 
   // Process images that are ready for uploading
@@ -109,8 +113,7 @@ const App = (props) => {
         maxFileSize={10242880}
       />
       <button onClick={() => handleSubmit()}>Click me to submit!</button>
-      <button onClick={checkPictures}>Check Pictures State</button>
-      <button onClick={checkPictureURL}>Check Picture URLs</button>
+      <button onClick={() => checkOrderInfo()}>Fetch Order Information</button>
     </div>
   );
 };
