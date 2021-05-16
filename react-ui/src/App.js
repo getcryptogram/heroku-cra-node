@@ -41,10 +41,11 @@ const App = (props) => {
   };
 
   const checkOrderInfo = () => {
-    const title = document.getElementsByClassName(
+    const parentWindow = Window.parent;
+    const title = parentWindow.document.getElementsByClassName(
       "product__description__name order-summary__emphasis"
     )[0].innerHTML;
-    const variant = document.getElementsByClassName(
+    const variant = parentWindow.document.getElementsByClassName(
       "product__description__variant order-summary__small-text"
     )[0].innerText;
     console.log("title is  ", title);
