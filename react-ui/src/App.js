@@ -43,7 +43,7 @@ const App = (props) => {
   const checkOrderInfo = () => {
     // eslint-disable-next-line no-restricted-globals
     const originWindow = parent.document.getElementById(window.name);
-    console.log("parent is ", parent);
+
     // eslint-disable-next-line no-restricted-globals
     const title = window.parent.document.getElementsByClassName(
       "product__description__name order-summary__emphasis"
