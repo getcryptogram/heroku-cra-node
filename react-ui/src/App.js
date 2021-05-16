@@ -41,12 +41,14 @@ const App = (props) => {
   };
 
   const checkOrderInfo = () => {
+    // eslint-disable-next-line no-restricted-globals
     const originWindow = parent.document.getElementById(window.name);
     console.log("parent is ", parent);
-
+    // eslint-disable-next-line no-restricted-globals
     const title = window.parent.document.getElementsByClassName(
       "product__description__name order-summary__emphasis"
     )[0].innerHTML;
+    // eslint-disable-next-line no-restricted-globals
     const variant = window.parent.document.getElementsByClassName(
       "product__description__variant order-summary__small-text"
     )[0].innerText;
