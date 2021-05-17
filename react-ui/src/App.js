@@ -17,6 +17,7 @@ const ReactS3Client = new S3(config);
 
 const App = (props) => {
   // Listening to event listener from app
+  console.log("adding message window listener");
   window.addEventListener(
     "message",
     (event) => {
@@ -25,6 +26,7 @@ const App = (props) => {
     },
     false
   );
+  console.log("window ", window);
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
 
