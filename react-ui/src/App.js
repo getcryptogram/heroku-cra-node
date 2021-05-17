@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ImageUploader from "react-images-upload";
 import Form from "./Form";
 import S3 from "react-aws-s3";
@@ -18,14 +18,14 @@ const ReactS3Client = new S3(config);
 const App = (props) => {
   // Listening to event listener from app
   console.log("adding message window listener");
-  window.addEventListener(
-    "message",
-    (event) => {
+
+  React.useEffect(() => {
+    window.addEventListener("message", (event) => {
       if (event.origin !== "http://example.org:8080") return;
-      console.log("event received ", event);
-    },
-    false
-  );
+      console.log("event received ", event.data);
+    });
+  }, []);
+
   console.log("window ", window);
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
