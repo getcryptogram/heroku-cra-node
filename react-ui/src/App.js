@@ -16,8 +16,16 @@ const config = {
 const ReactS3Client = new S3(config);
 
 const App = (props) => {
+  // Listening to event listener from app
+  window.addEventListener(
+    "message",
+    (event) => {
+      if (event.origin !== "http://example.org:8080") return;
+      console.log("event received ", event);
+    },
+    false
+  );
   const [pictures, setPictures] = useState([]);
-  const [pictureUrls, setPictureUrl] = useState([]);
   const [drawingNotes, setNotes] = useState("");
 
   const onDrop = (picture) => {
@@ -105,6 +113,16 @@ const App = (props) => {
         console.log("something went wrong ", e);
       });
   };
+
+  window.addEventListener(
+    "message",
+    (event) => {
+      if (event.origin !== "http://example.org:8080") return;
+
+      // ...
+    },
+    false
+  );
 
   return (
     <div className="widget-container">
