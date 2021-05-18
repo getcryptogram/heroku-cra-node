@@ -79,7 +79,11 @@ const App = (props) => {
 
   const handleSubmit = async () => {
     const preparedData = await prepareData();
-
+    const finalData = {
+      orderTitle: orderInfo,
+      imageUrls: preparedData,
+      drawingNotes: drawingNotes,
+    };
     const sendStr = `Order Title: ${orderInfo}
     
     Images: ${preparedData}
@@ -87,6 +91,7 @@ const App = (props) => {
     Drawing Notes: ${drawingNotes}
     `;
     console.log("what is sendStr ", sendStr);
+    console.log("what is finalData ", finalData);
     fetchIntegromat(url, sendStr)
       .then((response) => {
         if (!response.ok) {
