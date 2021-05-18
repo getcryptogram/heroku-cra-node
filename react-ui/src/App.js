@@ -84,9 +84,11 @@ const App = (props) => {
       imageUrls: preparedData,
       drawingNotes: drawingNotes,
     };
+    const imageString = preparedData.split(",").join("\n");
+    console.log("imageString is ", imageString);
     const sendStr = `Order Title: ${orderInfo}
     
-    Images: ${preparedData}
+    Images: ${imageString}
 
     Drawing Notes: ${drawingNotes}
     `;
