@@ -85,17 +85,16 @@ const App = (props) => {
       drawingNotes: drawingNotes,
     };
     console.log("What is preparedData ", preparedData);
-    const finalStr = preparedData.join("\n");
-    // const imageString = preparedData.split(",").join("\n");
-    console.log("finalString is ", finalStr);
-    const imageString = "string";
-    // console.log("imageString is ", imageString);
-    const sendStr = `Order Title: ${orderInfo}
+    const finalImageStr = preparedData.join("\n");
+    const finalTitleStr = orderInfo.join("\n");
     
-    Images: ${imageString}
+    const sendStr = `Order Title: ${finalTitleStr}
+    
+    Images: ${finalImageStr}
 
     Drawing Notes: ${drawingNotes}
     `;
+
     console.log("what is sendStr ", sendStr);
     console.log("what is finalData ", finalData);
     fetchIntegromat(url, finalData)
