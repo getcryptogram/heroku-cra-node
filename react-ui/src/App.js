@@ -23,7 +23,6 @@ const App = (props) => {
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
-      console.log("event received ", event.data);
       setOrderInfo(event.data);
       toggleOrderInfo(true);
     });
@@ -38,9 +37,6 @@ const App = (props) => {
     return new Promise((resolve, reject) => {
       return ReactS3Client.uploadFile(picture, picture.name)
         .then((data) => {
-          console.log("data.location ", data.location);
-          // setPictureUrl([...pictureUrls, data.location]);
-          // console.log("now pictureUrl is ", pictureUrls);
           resolve(data.location);
         })
         .catch((err) => {
@@ -59,7 +55,6 @@ const App = (props) => {
     const results = await Promise.all(
       pictures[pictures.length - 1].map(async (picture) => {
         const url = uploadToS3(picture);
-        console.log("youve been mapped ", url);
         return url;
       })
     );
@@ -84,8 +79,8 @@ const App = (props) => {
 
   const handleSubmit = async () => {
     const preparedData = await prepareData();
-    console.log("what is preparedData ", preparedData);
     const finalData = {
+      orderTitle: orderInfo,
       imageUrls: preparedData,
       drawingNotes: drawingNotes,
     };
