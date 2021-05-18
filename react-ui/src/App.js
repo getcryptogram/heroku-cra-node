@@ -85,7 +85,9 @@ const App = (props) => {
       drawingNotes: drawingNotes,
     };
     console.log("What is preparedData ", preparedData);
+    preparedData.map((img) => img).join("\n");
     // const imageString = preparedData.split(",").join("\n");
+    console.log("preparedData is ", preparedData);
     const imageString = "string";
     // console.log("imageString is ", imageString);
     const sendStr = `Order Title: ${orderInfo}
