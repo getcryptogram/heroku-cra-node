@@ -84,7 +84,6 @@ const App = (props) => {
       imageUrls: preparedData,
       drawingNotes: drawingNotes,
     };
-    console.log("What is preparedData ", preparedData);
     const finalImageStr = preparedData.join("\n");
     const finalTitleStr = Object.values(orderInfo).join("\n");
 
@@ -97,7 +96,7 @@ const App = (props) => {
 
     console.log("what is sendStr ", sendStr);
     console.log("what is finalData ", finalData);
-    fetchIntegromat(url, finalData)
+    fetchIntegromat(url, sendStr)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
