@@ -20,7 +20,6 @@ const App = (props) => {
   const [drawingNotes, setNotes] = useState("");
   const [orderInfo, setOrderInfo] = useState({});
   const [orderInfoSet, toggleOrderInfo] = useState(false);
-  console.log("correctly print access stuff ", config);
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
