@@ -42,7 +42,7 @@
   justify-content: flex-start;
   padding: 10px;
   max-width: 400px;
-  border: 1px solid #d9d9d9;
+  border: 6px solid red;
   color: #222;
   color: var(--text);
   z-index: 3000;

@@ -113,7 +113,7 @@ const App = (props) => {
 
   return (
     <div className="widget-container">
-      <h1 style={{textAlign: "center"}}> One More Step... </h1>
+      <h1 style={{textAlign: "center"}}> One Final Step... </h1>
       <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
       <Form {...props} setNotes={setNotes} />
       <ImageUploader

@@ -4,11 +4,11 @@ const Form = (props) => {
   return (
     <form style={{textAlign: "center"}}>
       <label style={{marginBottom: "15px"}}>
-        Drawing Notes (Optional):
+        Drawing Notes:
         </label>
         <textarea
           style={{marginTop: "15px"}}
-          placeholder={"You can include outfits, height differences, or favorite hobbies! Or just ask our artists to use their creativity!"}
+          placeholder={"Please provide notes about outfits, height differences, or favorite hobbies! Or just ask our artists to use their creativity!"}
           value={props.drawingNotes}
           onChange={(event) => props.setNotes(event.target.value)}
           maxlength={500}
