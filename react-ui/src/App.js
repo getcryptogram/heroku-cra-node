@@ -113,17 +113,21 @@ const App = (props) => {
 
   return (
     <div className="widget-container">
+      <h1 style={{textAlign: "center"}}> One More Step... </h1>
+      <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
       <Form {...props} setNotes={setNotes} />
       <ImageUploader
         {...props}
         withIcon={true}
         onChange={onDrop}
         withPreview={true}
-        imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
+        label={"Max file size: 10 mb, accepted: jpg, png"}
+        imgExtension={[".jpg", ".png", ".gif", ".jpeg"]}
         maxFileSize={10242880}
       />
-      <button onClick={() => handleSubmit()}>Click me to submit!</button>
-      <button onClick={() => checkOrderInfo()}>Fetch Order Information</button>
+      <div style={{width: "100%"}}>
+        <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+      </div>
     </div>
   );
 };
