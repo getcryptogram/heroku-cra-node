@@ -16,18 +16,18 @@ const config = {
 const ReactS3Client = new S3(config);
 
 const App = (props) => {
-  // Listening to event listener from app
-  console.log("adding message window listener");
+  const [pictures, setPictures] = useState([]);
+  const [drawingNotes, setNotes] = useState("");
+  const [orderInfo, setOrderInfo] = useState({});
+  const [orderInfoSet, toggleOrderInfo] = useState(false);
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
       console.log("event received ", event.data);
+      setOrderInfo(orderInfo);
+      orderInfoSet(true);
     });
   }, []);
-
-  console.log("window ", window);
-  const [pictures, setPictures] = useState([]);
-  const [drawingNotes, setNotes] = useState("");
 
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
@@ -50,19 +50,8 @@ const App = (props) => {
   };
 
   const checkOrderInfo = () => {
-    // eslint-disable-next-line no-restricted-globals
-    const originWindow = parent.document.getElementById(window.name);
-
-    // eslint-disable-next-line no-restricted-globals
-    const title = window.parent.document.getElementsByClassName(
-      "product__description__name order-summary__emphasis"
-    )[0].innerHTML;
-    // eslint-disable-next-line no-restricted-globals
-    const variant = window.parent.document.getElementsByClassName(
-      "product__description__variant order-summary__small-text"
-    )[0].innerText;
-    console.log("title is  ", title);
-    console.log("variant is  ", variant);
+    console.log("what is orderinfo ", orderInfo);
+    console.log("Is orderInfoSet ", orderInfoSet);
   };
 
   // Process images that are ready for uploading
@@ -114,16 +103,6 @@ const App = (props) => {
         console.log("something went wrong ", e);
       });
   };
-
-  window.addEventListener(
-    "message",
-    (event) => {
-      if (event.origin !== "http://example.org:8080") return;
-
-      // ...
-    },
-    false
-  );
 
   return (
     <div className="widget-container">
