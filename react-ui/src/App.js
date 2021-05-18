@@ -55,7 +55,7 @@ const App = (props) => {
     const results = await Promise.all(
       pictures[pictures.length - 1].map(async (picture) => {
         const url = uploadToS3(picture);
-        return url;
+        return url + " ";
       })
     );
 
@@ -84,7 +84,14 @@ const App = (props) => {
       imageUrls: preparedData,
       drawingNotes: drawingNotes,
     };
-    fetchIntegromat(url, finalData)
+    const sendStr = `Order Title: ${orderTitle}
+    
+    Images: ${preparedData}
+
+    Drawing Notes: ${drawingNotes}
+    `;
+    console.log("what is sendStr ", sendStr);
+    fetchIntegromat(url, sendStr)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
