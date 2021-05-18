@@ -25,7 +25,7 @@ const App = (props) => {
     window.addEventListener("message", (event) => {
       console.log("event received ", event.data);
       setOrderInfo(orderInfo);
-      orderInfoSet(true);
+      toggleOrderInfo(true);
     });
   }, []);
 
