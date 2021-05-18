@@ -84,8 +84,8 @@ const App = (props) => {
       imageUrls: preparedData,
       drawingNotes: drawingNotes,
     };
-    const finalImageStr = preparedData.join("\n");
-    const finalTitleStr = Object.values(orderInfo).join("\n");
+    const finalImageStr = preparedData.join(" ");
+    const finalTitleStr = Object.values(orderInfo).join(" ");
 
     const sendStr = `Order Title: ${finalTitleStr}
     
