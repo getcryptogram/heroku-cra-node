@@ -24,7 +24,7 @@ const App = (props) => {
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
       console.log("event received ", event.data);
-      setOrderInfo(orderInfo);
+      setOrderInfo(event.data);
       toggleOrderInfo(true);
     });
   }, []);
