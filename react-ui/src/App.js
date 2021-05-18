@@ -79,12 +79,8 @@ const App = (props) => {
 
   const handleSubmit = async () => {
     const preparedData = await prepareData();
-    const finalData = {
-      orderTitle: orderInfo,
-      imageUrls: preparedData,
-      drawingNotes: drawingNotes,
-    };
-    const sendStr = `Order Title: ${orderTitle}
+
+    const sendStr = `Order Title: ${orderInfo}
     
     Images: ${preparedData}
 
