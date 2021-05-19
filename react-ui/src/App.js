@@ -21,11 +21,6 @@ const App = (props) => {
   const [orderInfo, setOrderInfo] = useState({});
   const [orderNumber, setOrderNumber] = useState("");
   const [orderInfoSet, toggleOrderInfo] = useState(false);
-  
-  setInterval(function() {
-    // eslint-disable-next-line no-restricted-globals
-    parent.postMessage("Hello ", "*")
-  }, 3000);
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
@@ -149,10 +144,12 @@ const App = (props) => {
     // self.close()
 
     // eslint-disable-next-line no-restricted-globals
-    console.log("what is parent ", parent);
-
-    // eslint-disable-next-line no-restricted-globals
     parent.postMessage("close", "*");
+
+    //  setInterval(function() {
+    // eslint-disable-next-line no-restricted-globals
+    //parent.postMessage("Hello ", "*")
+    // }, 3000);
   }
 
   return (
