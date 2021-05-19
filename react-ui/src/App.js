@@ -122,19 +122,30 @@ const App = (props) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
-        window.parent.postMessage("close");
+        parent.postMessage("close", "https://www.lulucartoons.com");
+        // eslint-disable-next-line no-restricted-globals
+        window.parent.postMessage("close"), "https://www.lulucartoons.com";
+        
         iframe.style.display = "none";
       })
       .catch((e) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
+        parent.postMessage("close", "https://www.lulucartoons.com");
+        // eslint-disable-next-line no-restricted-globals
         window.parent.postMessage("close");
         iframe.style.display = "none";
       });
   };
   const handleClose = () => {
-    window.parent.postMessage("close");
+    // window.parent.postMessage("close");
+    console.log("is this being called ");
+    // window.close()
+    // eslint-disable-next-line no-restricted-globals
+    // self.close()
+    // eslint-disable-next-line no-restricted-globals
+    parent.postMessage("close", "https://www.lulucartoons.com");
   }
 
   return (
@@ -156,7 +167,7 @@ const App = (props) => {
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
         </div>
-        <button handleClose={() => handleClose()}>Click me to close!</button>
+        <button onClick={() => handleClose()}>Click me to close!</button>
       </div>
     </div>
   );

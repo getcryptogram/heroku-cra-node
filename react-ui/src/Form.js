@@ -11,7 +11,7 @@ const Form = (props) => {
           placeholder={"Please provide notes about outfits, height differences, or favorite hobbies! Or just ask our artists to use their creativity!"}
           value={props.drawingNotes}
           onChange={(event) => props.setNotes(event.target.value)}
-          maxlength={500}
+          maxLength={500}
           rows={4}
           cols={40}
         />
