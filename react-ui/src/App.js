@@ -24,6 +24,9 @@ const App = (props) => {
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
+      console.log("message received from ", event.origin)
+      if (event.origin == "https://www.lulucartoons.com") {
+        console.log("message received on app")
       let orderStr = '';
       if (event.data.orderArr) {
         for (var i = 0; i < event.data.orderArr.length - 1; i++) {
@@ -39,7 +42,8 @@ const App = (props) => {
       
       setOrderInfo(orderStr);
       toggleOrderInfo(true);
-    });
+    }
+  });
   }, []);
 
   const onDrop = (picture) => {
@@ -57,11 +61,6 @@ const App = (props) => {
           console.warn("error occurred: ", err);
         });
     });
-  };
-
-  const checkOrderInfo = () => {
-    console.log("what is orderinfo ", orderInfo);
-    console.log("Is orderInfoSet ", orderInfoSet);
   };
 
   // Process images that are ready for uploading
@@ -122,12 +121,16 @@ const App = (props) => {
       .then((json) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
+        // eslint-disable-next-line no-restricted-globals
+        parent.postMessage("close");
         iframe.style.display = "none";
         console.log("message received ", json);
       })
       .catch((e) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
+        // eslint-disable-next-line no-restricted-globals
+        parent.postMessage("close");
         iframe.style.display = "none";
         console.log("something went wrong ", e);
       });
