@@ -19,7 +19,7 @@ const App = (props) => {
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
   const [orderInfo, setOrderInfo] = useState({});
-  const [orderNumber, setOrderNumber] = useState("";)
+  const [orderNumber, setOrderNumber] = useState("");
   const [orderInfoSet, toggleOrderInfo] = useState(false);
 
   React.useEffect(() => {
