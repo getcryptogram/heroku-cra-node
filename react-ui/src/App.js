@@ -23,7 +23,17 @@ const App = (props) => {
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
-      setOrderInfo(event.data);
+      let orderStr = '';
+      if (event.data.orderArr) {
+        for (var i = 0; i < event.data.orderArr.length - 1; i++) {
+          for (const prop in event.data.orderArr[i]) {
+            orderStr += event.data.orderArr[i].prop     
+          }
+        }
+        console.log("orderStr is ", orderStr);
+      }
+      
+      setOrderInfo(orderStr);
       toggleOrderInfo(true);
     });
   }, []);
