@@ -142,12 +142,12 @@ const App = (props) => {
     // window.close()
     // eslint-disable-next-line no-restricted-globals
     // self.close()
-    console.log("what is window.parent ", window.parent);
+
     // eslint-disable-next-line no-restricted-globals
     console.log("what is parent ", parent);
 
     // eslint-disable-next-line no-restricted-globals
-    parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
+    parent.postMessage("close", "*");
   }
 
   return (
