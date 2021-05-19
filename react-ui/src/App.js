@@ -116,12 +116,12 @@ const App = (props) => {
         return response.json();
       })
       .then((json) => {
-        const iframe = document.getElementById('lulu-checkout-container');
+        const iframe = document.getElementById('lulu-post-checkout');
         iframe.style.display = "none";
         console.log("message received ", json);
       })
       .catch((e) => {
-        const iframe = document.getElementById('lulu-checkout-container');
+        const iframe = document.getElementById('lulu-post-checkout');
         iframe.style.display = "none";
         console.log("something went wrong ", e);
       });
