@@ -21,7 +21,9 @@ const App = (props) => {
   const [orderInfo, setOrderInfo] = useState({});
   const [orderNumber, setOrderNumber] = useState("");
   const [orderInfoSet, toggleOrderInfo] = useState(false);
+  
   setInterval(function() {
+    // eslint-disable-next-line no-restricted-globals
     parent.postMessage("Hello ", "*")
   }, 3000);
 
@@ -151,7 +153,6 @@ const App = (props) => {
 
     // eslint-disable-next-line no-restricted-globals
     parent.postMessage("close", "*");
-    this.iframe.remove();
   }
 
   return (
