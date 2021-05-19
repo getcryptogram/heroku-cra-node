@@ -120,37 +120,13 @@ const App = (props) => {
       })
       .then((json) => {
         // eslint-disable-next-line no-restricted-globals
-        const iframe = parent.document.getElementById('lulu-post-checkout');
-        // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
-        // eslint-disable-next-line no-restricted-globals
-        
-        iframe.style.display = "none";
+        parent.postMessage("close", "*");
       })
       .catch((e) => {
         // eslint-disable-next-line no-restricted-globals
-        const iframe = parent.document.getElementById('lulu-post-checkout');
-        // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
-        // eslint-disable-next-line no-restricted-globals
-        window.parent.postMessage("close");
-        iframe.style.display = "none";
+        parent.postMessage("close", "*");
       });
   };
-  const handleClose = () => {
-    // window.parent.postMessage("close");
-    // window.close()
-    // eslint-disable-next-line no-restricted-globals
-    // self.close()
-
-    // eslint-disable-next-line no-restricted-globals
-    parent.postMessage("close", "*");
-
-    //  setInterval(function() {
-    // eslint-disable-next-line no-restricted-globals
-    //parent.postMessage("Hello ", "*")
-    // }, 3000);
-  }
 
   return (
     <div id="lulu-checkout-container">
@@ -171,7 +147,6 @@ const App = (props) => {
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
         </div>
-        <button onClick={() => handleClose()}>Click me to close!</button>
       </div>
     </div>
   );
