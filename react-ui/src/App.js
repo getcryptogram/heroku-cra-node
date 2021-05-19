@@ -122,9 +122,8 @@ const App = (props) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close", "https://www.lulucartoons.com");
+        parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
         // eslint-disable-next-line no-restricted-globals
-        window.parent.postMessage("close"), "https://www.lulucartoons.com";
         
         iframe.style.display = "none";
       })
@@ -132,7 +131,7 @@ const App = (props) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close", "https://www.lulucartoons.com");
+        parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
         // eslint-disable-next-line no-restricted-globals
         window.parent.postMessage("close");
         iframe.style.display = "none";
@@ -140,12 +139,16 @@ const App = (props) => {
   };
   const handleClose = () => {
     // window.parent.postMessage("close");
-    console.log("is this being called ");
     // window.close()
     // eslint-disable-next-line no-restricted-globals
     // self.close()
+
     // eslint-disable-next-line no-restricted-globals
-    parent.postMessage("close", "https://www.lulucartoons.com");
+    parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
+    window.parent.postMessage("close", "https://fathomless-brook-11522.herokuapp.com/");
+    console.log("what is window.parent ", window.parent);
+    // eslint-disable-next-line no-restricted-globals
+    console.log("what is parent ", parent);
   }
 
   return (
