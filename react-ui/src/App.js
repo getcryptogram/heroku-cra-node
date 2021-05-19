@@ -31,7 +31,7 @@ const App = (props) => {
       if (event.data.orderArr) {
         for (var i = 0; i < event.data.orderArr.length - 1; i++) {
           for (const prop in event.data.orderArr[i]) {
-            orderStr += event.data.orderArr[i].prop     
+            orderStr += event.data.orderArr[i][prop] + " "
           }
         }
         console.log("orderStr is ", orderStr);
