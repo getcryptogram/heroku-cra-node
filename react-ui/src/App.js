@@ -120,12 +120,14 @@ const App = (props) => {
         return response.json();
       })
       .then((json) => {
-        const iframe = top.document.getElementById('lulu-post-checkout');
+        // eslint-disable-next-line no-restricted-globals
+        const iframe = parent.document.getElementById('lulu-post-checkout');
         iframe.style.display = "none";
         console.log("message received ", json);
       })
       .catch((e) => {
-        const iframe = top.document.getElementById('lulu-post-checkout');
+        // eslint-disable-next-line no-restricted-globals
+        const iframe = parent.document.getElementById('lulu-post-checkout');
         iframe.style.display = "none";
         console.log("something went wrong ", e);
       });
