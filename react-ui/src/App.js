@@ -90,8 +90,6 @@ const App = (props) => {
     const sendStr = `Order Title: ${finalTitleStr}  Images: ${finalImageStr} Drawing Notes: ${drawingNotes}
     `;
 
-    console.log("what is sendStr ", sendStr);
-    console.log("what is finalData ", finalData);
     fetchIntegromat(url, sendStr)
       .then((response) => {
         if (!response.ok) {
@@ -100,33 +98,37 @@ const App = (props) => {
         return response.json();
       })
       .then((json) => {
+        const iframe = document.getElementById('lulu-checkout-container');
+        iframe.style.display = "none";
         console.log("message received ", json);
       })
       .catch((e) => {
+        const iframe = document.getElementById('lulu-checkout-container');
+        iframe.style.display = "none";
         console.log("something went wrong ", e);
       });
   };
 
   return (
-    <div>
+    <div id="lulu-checkout-container">
       <div className="lulu-overlay-container"></div>
-    <div className="widget-container">
-      <h1 style={{textAlign: "center"}}> One Final Step... </h1>
-      <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
-      <Form {...props} setNotes={setNotes} />
-      <ImageUploader
-        {...props}
-        withIcon={true}
-        onChange={onDrop}
-        withPreview={true}
-        label={"Max file size: 10 mb, accepted: jpg, png"}
-        imgExtension={[".jpg", ".png", ".gif", ".jpeg"]}
-        maxFileSize={10242880}
-      />
-      <div style={{width: "100%"}}>
-        <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+      <div className="widget-container">
+        <h1 style={{textAlign: "center"}}> One Final Step... </h1>
+        <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
+        <Form {...props} setNotes={setNotes} />
+        <ImageUploader
+          {...props}
+          withIcon={true}
+          onChange={onDrop}
+          withPreview={true}
+          label={"Max file size: 10 mb, accepted: jpg, png"}
+          imgExtension={[".jpg", ".png", ".gif", ".jpeg"]}
+          maxFileSize={10242880}
+        />
+        <div style={{width: "100%"}}>
+          <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
