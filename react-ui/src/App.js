@@ -29,7 +29,7 @@ const App = (props) => {
         console.log("message received on app")
       let orderStr = '';
       if (event.data.orderArr) {
-        for (var i = 0; i < event.data.orderArr.length - 1; i++) {
+        for (var i = 0; i < event.data.orderArr.length; i++) {
           for (const prop in event.data.orderArr[i]) {
             orderStr += event.data.orderArr[i][prop] + " "
           }
