@@ -19,6 +19,7 @@ const App = (props) => {
   const [pictures, setPictures] = useState([]);
   const [drawingNotes, setNotes] = useState("");
   const [orderInfo, setOrderInfo] = useState({});
+  const [orderNumber, setOrderNumber] = useState("";)
   const [orderInfoSet, toggleOrderInfo] = useState(false);
 
   React.useEffect(() => {
@@ -31,6 +32,9 @@ const App = (props) => {
           }
         }
         console.log("orderStr is ", orderStr);
+      }
+      if (event.data.orderNumber) {
+        setOrderNumber(event.data.orderNumber);
       }
       
       setOrderInfo(orderStr);
@@ -105,7 +109,7 @@ const App = (props) => {
     const finalImageStr = preparedData.join(" ");
     const finalTitleStr = Object.values(orderInfo).join(" ");
 
-    const sendStr = `Order Title: ${finalTitleStr}  Images: ${finalImageStr} Drawing Notes: ${drawingNotes}
+    const sendStr = `Order Number: ${orderNumber} Order Title: ${finalTitleStr}  Images: ${finalImageStr} Drawing Notes: ${drawingNotes}
     `;
 
     fetchIntegromat(url, sendStr)
