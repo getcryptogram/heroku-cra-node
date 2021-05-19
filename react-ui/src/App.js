@@ -122,19 +122,20 @@ const App = (props) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close");
+        window.parent.postMessage("close");
         iframe.style.display = "none";
-        console.log("message received ", json);
       })
       .catch((e) => {
         // eslint-disable-next-line no-restricted-globals
         const iframe = parent.document.getElementById('lulu-post-checkout');
         // eslint-disable-next-line no-restricted-globals
-        parent.postMessage("close");
+        window.parent.postMessage("close");
         iframe.style.display = "none";
-        console.log("something went wrong ", e);
       });
   };
+  const handleClose = () => {
+    window.parent.postMessage("close");
+  }
 
   return (
     <div id="lulu-checkout-container">
@@ -155,6 +156,7 @@ const App = (props) => {
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
         </div>
+        <button handleClose={() => handleClose()}>Click me to close!</button>
       </div>
     </div>
   );
