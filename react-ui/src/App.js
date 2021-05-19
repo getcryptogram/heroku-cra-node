@@ -87,11 +87,7 @@ const App = (props) => {
     const finalImageStr = preparedData.join(" ");
     const finalTitleStr = Object.values(orderInfo).join(" ");
 
-    const sendStr = `Order Title: ${finalTitleStr}
-    
-    Images: ${finalImageStr}
-
-    Drawing Notes: ${drawingNotes}
+    const sendStr = `Order Title: ${finalTitleStr}  Images: ${finalImageStr} Drawing Notes: ${drawingNotes}
     `;
 
     console.log("what is sendStr ", sendStr);
@@ -112,6 +108,8 @@ const App = (props) => {
   };
 
   return (
+    <div>
+      <div className="lulu-overlay-container"></div>
     <div className="widget-container">
       <h1 style={{textAlign: "center"}}> One Final Step... </h1>
       <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
@@ -128,6 +126,7 @@ const App = (props) => {
       <div style={{width: "100%"}}>
         <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
       </div>
+    </div>
     </div>
   );
 };

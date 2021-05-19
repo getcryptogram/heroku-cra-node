@@ -48,6 +48,23 @@
   z-index: 3000;
 }
 
+.lulu-overlay-container {
+  position: absolute; 
+  opacity: 1; 
+  transform: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  z-index: 15;
+}
+
 .submit-button {
   background-color: #072D4C;
   padding: 15px 50px;
