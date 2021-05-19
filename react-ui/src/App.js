@@ -78,6 +78,14 @@ const App = (props) => {
   };
 
   const handleSubmit = async () => {
+    if (drawingNotes.length < 10) {
+      alert("Please include more detailed drawing notes!");
+      return;
+    }
+    if (pictures.length < 1) {
+      alert("Please upload at least 1 picture!");
+      return;
+    }
     const preparedData = await prepareData();
     const finalData = {
       orderTitle: orderInfo,
