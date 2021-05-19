@@ -25,7 +25,7 @@ const App = (props) => {
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
       console.log("message received from ", event.origin)
-      if (event.origin == "https://www.lulucartoons.com") {
+      if (event.origin == "https://lulucartoons.com") {
         console.log("message received on app")
       let orderStr = '';
       if (event.data.orderArr) {
