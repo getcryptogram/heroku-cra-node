@@ -6,6 +6,7 @@ import S3 from "react-aws-s3";
 import "./App.css";
 
 const url = process.env.REACT_APP_INTEGROMAT_URL;
+console.log("what is url ", url);
 const config = {
   bucketName: "lulu-postupload",
   dirName: "Orders" /* optional */,
@@ -71,15 +72,16 @@ const App = (props) => {
     return results;
   };
   const fetchIntegromat = async (url = "", data) => {
+    console.log("what is data ", data);
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "no-cors", // no-cors, *cors, same-origin
+      mode: "cors ", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json"
       },
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
     };
 
     const response = await fetch(url, fetchBody);
@@ -124,9 +126,9 @@ const App = (props) => {
   };
   const fakeSubmit = async () => {
     const testData = {
-      "order": "#1234",
+      "order": "1234",
       "orderTitle": "This is a Title",
-      "imageUrls": ["image1", "image2"],
+      "imageUrls": "iamage 1 , image 2",
       "drawingNotes": "drawingNotes"
     };
 
@@ -136,6 +138,7 @@ const App = (props) => {
         throw new Error(`status ${response.status}`);
       }
       return response.json();
+      console.log("successful");
     })
     .then((json) => {
       // eslint-disable-next-line no-restricted-globals
@@ -167,7 +170,6 @@ const App = (props) => {
         />
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
-          <button onClick={() => fakeSubmit()}>Click me to Fake submit!</button>
         </div>
       </div>
     </div>
