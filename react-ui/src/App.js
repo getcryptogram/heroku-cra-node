@@ -73,7 +73,7 @@ const App = (props) => {
   };
   const fetchIntegromat = async (url = "", data) => {
     console.log("what is url ", url);
-    console.log("what is data ", data);
+    console.log("what is data indisde the fetch", data);
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "no-cors", // no-cors, *cors, same-origin
@@ -99,13 +99,15 @@ const App = (props) => {
     }
     const preparedData = await prepareData();
     const finalImageStr = preparedData.join(" , ");
-    const finalTitleStr = Object.values(orderInfo).join(" , ");
-    const finalData = {
-      "order": orderNumber,
-      "orderTitle": finalTitleStr,
-      "imageUrls": finalImageStr,
-      "drawingNotes": drawingNotes,
-    };
+    const finalTitleStr = Object.values(orderInfo).join("");
+    if (preparedData) {
+      const finalData = {
+        "order": orderNumber,
+        "orderTitle": finalTitleStr,
+        "imageUrls": finalImageStr,
+        "drawingNotes": drawingNotes
+      }
+    }
     console.log("finalData is ", finalData);
 
     fetchIntegromat(url, finalData)
@@ -172,7 +174,6 @@ const App = (props) => {
         />
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
-          <button className="submit-button" onClick={() => fakeSubmit()}>Click me to fake submit!</button>
         </div>
       </div>
     </div>
