@@ -167,6 +167,7 @@ const App = (props) => {
         />
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+          <button onClick={() => fakeSubmit()}>Click me to Fake submit!</button>
         </div>
       </div>
     </div>
