@@ -96,8 +96,8 @@ const App = (props) => {
       return;
     }
     const preparedData = await prepareData();
-    const finalImageStr = preparedData.join(" ");
-    const finalTitleStr = Object.values(orderInfo).join(" ");
+    const finalImageStr = preparedData.join(" , ");
+    const finalTitleStr = Object.values(orderInfo).join(" , ");
     const finalData = {
       order: orderNumber,
       orderTitle: finalTitleStr,
