@@ -100,16 +100,14 @@ const App = (props) => {
     const preparedData = await prepareData();
     const finalImageStr = preparedData.join(" , ");
     const finalTitleStr = Object.values(orderInfo).join("");
-    if (preparedData) {
-      const finalData = {
-        "order": orderNumber,
-        "orderTitle": finalTitleStr,
-        "imageUrls": finalImageStr,
-        "drawingNotes": drawingNotes
-      }
+    const finalData = {
+      "order": orderNumber,
+      "orderTitle": finalTitleStr,
+      "imageUrls": finalImageStr,
+      "drawingNotes": drawingNotes
     }
     console.log("finalData is ", finalData);
-
+    if (preparedData) {
     fetchIntegromat(url, finalData)
       .then((response) => {
         if (!response.ok) {
@@ -125,6 +123,7 @@ const App = (props) => {
         // eslint-disable-next-line no-restricted-globals
         parent.postMessage("close", "*");
       });
+    }
   };
   const fakeSubmit = async () => {
     const testData = {
