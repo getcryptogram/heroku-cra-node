@@ -72,16 +72,16 @@ const App = (props) => {
     return results;
   };
   const fetchIntegromat = async (url = "", data) => {
+    console.log("what is url ", url);
     console.log("what is data ", data);
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors ", // no-cors, *cors, same-origin
+      mode: "no-cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      body: data // body data type must match "Content-Type" header
     };
 
     const response = await fetch(url, fetchBody);
@@ -130,21 +130,23 @@ const App = (props) => {
       "orderTitle": "This is a Title",
       "imageUrls": "iamage 1 , image 2",
       "drawingNotes": "drawingNotes"
-    };
+    }
 
     fetchIntegromat(url, testData)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`status ${response.status}`);
       }
+      console.log("response.json() ", response.json())
       return response.json();
-      console.log("successful");
     })
     .then((json) => {
+      console.log("success message ", json)
       // eslint-disable-next-line no-restricted-globals
       parent.postMessage("close", "*");
     })
     .catch((e) => {
+      console.log("error ", e);
       // eslint-disable-next-line no-restricted-globals
       parent.postMessage("close", "*");
     });
@@ -170,6 +172,7 @@ const App = (props) => {
         />
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+          <button className="submit-button" onClick={() => fakeSubmit()}>Click me to fake submit!</button>
         </div>
       </div>
     </div>
