@@ -24,9 +24,7 @@ const App = (props) => {
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
-      console.log("message received from ", event.origin)
       if (event.origin == "https://lulucartoons.com") {
-        console.log("message received on app")
       let orderStr = '';
       if (event.data.orderArr) {
         for (var i = 0; i < event.data.orderArr.length; i++) {
@@ -34,12 +32,10 @@ const App = (props) => {
             orderStr += event.data.orderArr[i][prop] + " "
           }
         }
-        console.log("orderStr is ", orderStr);
       }
       if (event.data.orderNumber) {
         setOrderNumber(event.data.orderNumber);
       }
-      
       setOrderInfo(orderStr);
       toggleOrderInfo(true);
     }
@@ -100,18 +96,17 @@ const App = (props) => {
       return;
     }
     const preparedData = await prepareData();
-    const finalData = {
-      orderTitle: orderInfo,
-      imageUrls: preparedData,
-      drawingNotes: drawingNotes,
-    };
     const finalImageStr = preparedData.join(" ");
     const finalTitleStr = Object.values(orderInfo).join(" ");
+    const finalData = {
+      order: orderNumber,
+      orderTitle: finalTitleStr,
+      imageUrls: finalImageStr,
+      drawingNotes: drawingNotes,
+    };
+    console.log("finalData is ", finalData);
 
-    const sendStr = `Order Number: ${orderNumber} Order Title: ${finalTitleStr}  Images: ${finalImageStr} Drawing Notes: ${drawingNotes}
-    `;
-
-    fetchIntegromat(url, sendStr)
+    fetchIntegromat(url, finalData)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
