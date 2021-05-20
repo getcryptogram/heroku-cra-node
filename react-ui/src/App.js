@@ -99,10 +99,10 @@ const App = (props) => {
     const finalImageStr = preparedData.join(" , ");
     const finalTitleStr = Object.values(orderInfo).join(" , ");
     const finalData = {
-      order: orderNumber,
-      orderTitle: finalTitleStr,
-      imageUrls: finalImageStr,
-      drawingNotes: drawingNotes,
+      "order": orderNumber,
+      "orderTitle": finalTitleStr,
+      "imageUrls": finalImageStr,
+      "drawingNotes": drawingNotes,
     };
     console.log("finalData is ", finalData);
 
@@ -122,6 +122,32 @@ const App = (props) => {
         parent.postMessage("close", "*");
       });
   };
+  const fakeSubmit = async () => {
+    const testData = {
+      "order": "#1234",
+      "orderTitle": "This is a Title",
+      "imageUrls": ["image1", "image2"],
+      "drawingNotes": "drawingNotes"
+    };
+
+    fetchIntegromat(url, testData)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`status ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((json) => {
+      // eslint-disable-next-line no-restricted-globals
+      parent.postMessage("close", "*");
+    })
+    .catch((e) => {
+      // eslint-disable-next-line no-restricted-globals
+      parent.postMessage("close", "*");
+    });
+
+  }
+
 
   return (
     <div id="lulu-checkout-container">
