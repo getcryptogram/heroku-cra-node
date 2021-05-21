@@ -75,7 +75,6 @@ const App = (props) => {
   const fetchIntegromat = async (url = "", data) => {
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "no-cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
         "Content-Type": "application/json"
