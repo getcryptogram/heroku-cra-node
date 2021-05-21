@@ -6,7 +6,6 @@ import S3 from "react-aws-s3";
 import "./App.css";
 
 const url = process.env.REACT_APP_INTEGROMAT_URL;
-console.log("what is url ", url);
 const config = {
   bucketName: "lulu-postupload",
   dirName: "Orders" /* optional */,
@@ -98,12 +97,12 @@ const App = (props) => {
     }
     toggleSubmitting(true);
     let preparedData = await prepareData();
-    const finalImageStr = preparedData.join(" , ");
     const finalTitleStr = Object.values(orderInfo).join("");
     preparedData = preparedData.map(imageString => {
       const stripped = imageString.replace(/\s+/g, '');
       return stripped;
     })
+    const finalImageStr = preparedData.join(" , ");
     console.log("new preparedData is ", preparedData);
     const finalData = {
       order: orderNumber,
