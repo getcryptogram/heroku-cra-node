@@ -22,6 +22,7 @@ const App = (props) => {
   const [orderInfo, setOrderInfo] = useState({});
   const [orderNumber, setOrderNumber] = useState("");
   const [orderInfoSet, toggleOrderInfo] = useState(false);
+  const [submittingState, toggleSubmitting] = useState(false);
 
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
@@ -66,10 +67,10 @@ const App = (props) => {
     const results = await Promise.all(
       pictures[pictures.length - 1].map(async (picture) => {
         const url = uploadToS3(picture);
-        return url;
+        const stripped = url.replace(/\s+/g, '')
+        return stripped;
       })
     );
-
     return results;
   };
   const fetchIntegromat = async (url = "", data) => {
@@ -95,6 +96,7 @@ const App = (props) => {
       alert("Please upload at least 1 picture!");
       return;
     }
+    toggleSubmitting(true);
     const preparedData = await prepareData();
     const finalImageStr = preparedData.join(" , ");
     const finalTitleStr = Object.values(orderInfo).join("");
@@ -114,6 +116,7 @@ const App = (props) => {
         return response.json();
       })
       .then((json) => {
+        toggleSubmitting(false);
         // eslint-disable-next-line no-restricted-globals
         parent.postMessage("close", "*");
       })
@@ -170,7 +173,7 @@ const App = (props) => {
           maxFileSize={10242880}
         />
         <div style={{width: "100%"}}>
-          <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+          <button className="submit-button" disabled={!orderInfoSet || submittingState} onClick={() => handleSubmit()}>Click me to submit!</button>
         </div>
       </div>
     </div>
