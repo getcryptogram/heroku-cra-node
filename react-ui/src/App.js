@@ -80,7 +80,7 @@ const App = (props) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: data // body data type must match "Content-Type" header
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
     };
 
     const response = await fetch(url, fetchBody);
@@ -126,10 +126,10 @@ const App = (props) => {
   };
   const fakeSubmit = async () => {
     const testData = {
-      "order": "1234",
-      "orderTitle": "This is a Title",
-      "imageUrls": "iamage 1 , image 2",
-      "drawingNotes": "drawingNotes"
+      order: "1234",
+      orderTitle: "This is a Title",
+      imageUrls: "iamage 1 , image 2",
+      drawingNotes: "drawingNotes"
     }
 
     fetchIntegromat(url, testData)
