@@ -52,7 +52,7 @@ const App = (props) => {
   //Uploads files to s3 bucket
   const uploadToS3 = async (picture) => {
     return new Promise((resolve, reject) => {
-      const stripped = picture.replace(/\s+/g, '');
+      const stripped = picture.name.replace(/\s+/g, '');
       return ReactS3Client.uploadFile(picture, stripped)
         .then((data) => {
           resolve(data.location);
