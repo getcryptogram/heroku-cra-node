@@ -67,8 +67,7 @@ const App = (props) => {
     const results = await Promise.all(
       pictures[pictures.length - 1].map(async (picture) => {
         const url = uploadToS3(picture);
-        const stripped = url.replace(/\s+/g, '')
-        return stripped;
+        return url;
       })
     );
     return results;
@@ -97,9 +96,14 @@ const App = (props) => {
       return;
     }
     toggleSubmitting(true);
-    const preparedData = await prepareData();
+    let preparedData = await prepareData();
     const finalImageStr = preparedData.join(" , ");
     const finalTitleStr = Object.values(orderInfo).join("");
+    preparedData = preparedData.map(imageString => {
+      const stripped = imageString.replace(/\s+/g, '');
+      return stripped;
+    })
+    console.log("new preparedData is ", preparedData);
     const finalData = {
       order: orderNumber,
       orderTitle: finalTitleStr,
