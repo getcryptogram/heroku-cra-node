@@ -26,19 +26,20 @@ const App = (props) => {
   React.useEffect(() => {
     window.addEventListener("message", (event) => {
       if (event.origin == "https://lulucartoons.com") {
-      let orderStr = '';
-      if (event.data.orderArr) {
-        for (var i = 0; i < event.data.orderArr.length; i++) {
-          for (const prop in event.data.orderArr[i]) {
-            orderStr += event.data.orderArr[i][prop] + " "
+        let orderStr = '';
+        if (event.data.orderArr) {
+          for (var i = 0; i < event.data.orderArr.length; i++) {
+            for (const prop in event.data.orderArr[i]) {
+              orderStr += event.data.orderArr[i][prop] + " "
+            }
           }
+          orderStr = orderStr.replace(/(\r\n|\n|\r)/gm, "");
         }
-      }
-      if (event.data.orderNumber) {
-        setOrderNumber(event.data.orderNumber);
-      }
-      setOrderInfo(orderStr);
-      toggleOrderInfo(true);
+        if (event.data.orderNumber) {
+          setOrderNumber(event.data.orderNumber);
+        }
+        setOrderInfo(orderStr);
+        toggleOrderInfo(true);
     }
   });
   }, []);
@@ -72,8 +73,6 @@ const App = (props) => {
     return results;
   };
   const fetchIntegromat = async (url = "", data) => {
-    console.log("what is url ", url);
-    console.log("what is data indisde the fetch", data);
     const fetchBody = {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "no-cors", // no-cors, *cors, same-origin
@@ -173,6 +172,7 @@ const App = (props) => {
         />
         <div style={{width: "100%"}}>
           <button className="submit-button" onClick={() => handleSubmit()}>Click me to submit!</button>
+          <button className="submit-button" onClick={() => fakeSubmit()}>Click me to fake submit!</button>
         </div>
       </div>
     </div>
