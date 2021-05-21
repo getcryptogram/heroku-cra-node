@@ -163,7 +163,7 @@ const App = (props) => {
 
   return (
     <div id="lulu-checkout-container">
-      <div className="lulu-overlay-container"></div>
+      <div className="lulu-overlay-container">
       <div className="widget-container">
         <h1 style={{textAlign: "center"}}> One Final Step... </h1>
         <h2 style={{textAlign: "center"}}> Complete Your Order Below! </h2>
@@ -180,6 +180,7 @@ const App = (props) => {
         <div style={{width: "100%"}}>
           <button className="submit-button" disabled={!orderInfoSet || submittingState} onClick={() => handleSubmit()}>Click me to submit!</button>
         </div>
+      </div>
       </div>
     </div>
   );
